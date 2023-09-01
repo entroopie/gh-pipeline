@@ -1,6 +1,5 @@
 import pandas as pd
 from prefect import flow, task
-from prefect.deployments import Deployment
 from prefect_gcp import GcsBucket
 import os
 from pathlib import Path
@@ -10,7 +9,7 @@ def fetch_from_web(year: int, month: int, day: int, hour: int) -> pd.DataFrame:
 
     dataset_url = f"https://data.gharchive.org/{year}-{month:02}-{day:02}-{hour}.json.gz"    
     header = {'User-Agent': 'pandas'}
-    return pd.read_json(dataset_url, storage_options = header, lines=True, compression="gzip")
+    return pd.read_json(dataset_url, storage_options=header, lines=True, compression="gzip")
 
 @task()
 def clean(df: pd.DataFrame) -> pd.DataFrame:
@@ -47,6 +46,7 @@ def ingest(year: int, months: list[int], days: list[int], hours: list[int], gcp_
             for hour in hours:
                 file = f"{year}-{month:02}-{day:02}-{hour}.parquet.gz"
                 dirpath = Path(f"gh_data/{year}/{month:02}/{day:02}/")
+
                 if not os.path.exists(dirpath):
                     os.makedirs(dirpath, exist_ok=True)
                 full_path = Path(os.path.join(dirpath, file))
@@ -59,7 +59,7 @@ def ingest(year: int, months: list[int], days: list[int], hours: list[int], gcp_
 if __name__ == "__main__":
     year = 2015
     months = [4]
-    days = [4]
-    hours = [0]#list(range(1, 25))
+    days = [5,6]
+    hours = list(range(0, 23))
     gcp_bucket_name = "test1"
     ingest(year, months, days, hours, gcp_bucket_name)
