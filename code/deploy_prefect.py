@@ -29,5 +29,6 @@ if __name__ == "__main__":
     with open("code\gcp_credentials.json") as file:
         gcp_key = json.load(file)
     gcs_bucket_name = "prefect-de-zoomcamp-marcel"
+    
     deploy_flows()
     create_blocks(gcp_key, gcs_bucket_name)

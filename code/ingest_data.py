@@ -3,6 +3,7 @@ from prefect import flow, task
 from prefect_gcp import GcsBucket
 import os
 from pathlib import Path
+import json
 
 @task(retries=3)
 def fetch_from_web(year: int, month: int, day: int, hour: int) -> pd.DataFrame:
@@ -15,6 +16,7 @@ def fetch_from_web(year: int, month: int, day: int, hour: int) -> pd.DataFrame:
 def clean(df: pd.DataFrame) -> pd.DataFrame:
     df["type"] = df["type"].astype("string")
     df["id"] = df["id"].astype("Int64")
+    df["payload"] = df["payload"].apply(lambda x: json.dumps(x)).astype("string")
     df["created_at"] = pd.to_datetime(df["created_at"])
 
     df["year"] = df["created_at"].apply(lambda x: x.year)
@@ -59,7 +61,7 @@ def ingest(year: int, months: list[int], days: list[int], hours: list[int], gcp_
 if __name__ == "__main__":
     year = 2015
     months = [4]
-    days = [5,6]
+    days = [7]
     hours = list(range(0, 23))
     gcp_bucket_name = "test1"
     ingest(year, months, days, hours, gcp_bucket_name)
