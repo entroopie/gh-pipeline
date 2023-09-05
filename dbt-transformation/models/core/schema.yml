@@ -6,3 +6,7 @@ sources:
     schema: gh_test_dev
     tables: 
       - name: external_ghdata
+
+models:
+  - name: ghdata_count_events
+    description: "Daily number of events"
