@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: staging
+    database: durable-sunspot-392411
+    schema: gh_test_dev
+    tables: 
+      - name: external_ghdata
+
+models:
+  - name: ghdata_rm_duplicates
+    description: "No duplicates and removed bots"
+    columns:
+        - name: id
+          description: "Primary key"
+          tests:
+            - unique
+        - name: type
+        - name: actor
+        - name: repo
+        - name: payload
+        - name: public
+        - name: created_at
+        - name: org
+        - name: year
+        - name: month
+        - name: day

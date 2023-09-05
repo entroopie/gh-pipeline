@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: staging
+    database: durable-sunspot-392411
+    schema: gh_test_dev
+    tables: 
+      - name: external_ghdata
+
+models:
+  - name: ghdata_count_events
+    description: "Daily number of events"
