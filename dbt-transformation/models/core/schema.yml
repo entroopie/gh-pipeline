@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: staging
+    database: durable-sunspot-392411
+    schema: gh_test_dev
+    tables: 
+      - name: external_ghdata
