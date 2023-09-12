@@ -3,10 +3,13 @@ version: 2
 sources:
   - name: staging
     database: durable-sunspot-392411
-    schema: gh_test_dev
+    schema: dbt_database
     tables: 
-      - name: external_ghdata
+      - name: ghdata_rm_duplicates
 
 models:
-  - name: ghdata_count_events
+  - name: daily_events
     description: "Daily number of events"
+
+  - name: daily_active_users_push
+    description: "Daily number of user activity"
