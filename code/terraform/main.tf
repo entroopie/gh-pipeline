@@ -11,7 +11,7 @@ terraform {
 provider "google" {
   project = var.project
   region  = var.region
-  // credentials = file(var.credentials)  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
+  credentials = file(var.credentials)  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
 }
 
 resource "google_storage_bucket" "data-lake-bucket" {

@@ -1,5 +1,5 @@
 locals {
-  data_lake_bucket = "github-data-raw"
+  data_lake_bucket = "github_data_raw"
 }
 
 variable "project" {
@@ -18,4 +18,8 @@ variable "storage_class" {
 variable "BQ_DATASET" {
   description = "BigQuery Dataset that raw data (from GCS) will be written to"
   type        = string
+}
+
+variable "credentials" {
+  description = "GCP credentials (json)"
 }

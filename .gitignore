@@ -1,3 +1,4 @@
+code/gcp_credentials.json
 gh_data/*
 spark_testing.ipynb
 # Default .gitignore content added by dbt Cloud
@@ -5,3 +6,8 @@ dbt-transformations/target/
 dbt-transformations/dbt_packages/
 dbt-transformations/logs/
 # end dbt Cloud content
+code/terraform/.terraform
+code/terraform/terraform.tfstate
+code/terraform/.terraform.lock.hcl
+code/terraform/terraform.tfstate.backup
+code/terraform/terraform.tfstate
