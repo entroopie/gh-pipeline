@@ -14,6 +14,7 @@ def fetch_from_web(year: int, month: int, day: int, hour: int) -> pd.DataFrame:
 
 @task()
 def clean(df: pd.DataFrame) -> pd.DataFrame:
+    
     df["type"] = df["type"].astype("string")
     df["id"] = df["id"].astype("Int64")
     df["payload"] = df["payload"].apply(lambda x: json.dumps(x)).astype("string")
@@ -43,6 +44,7 @@ def write_gcs(path: Path, gcp_bucket_name: str) -> None:
 
 @flow(log_prints=True)
 def ingest(year: int, months: list[int], days: list[int], hours: list[int], gcp_bucket_name: str) -> None:
+    
     for month in months:
         for day in days:
             for hour in hours:
@@ -51,6 +53,7 @@ def ingest(year: int, months: list[int], days: list[int], hours: list[int], gcp_
 
                 if not os.path.exists(dirpath):
                     os.makedirs(dirpath, exist_ok=True)
+                    
                 full_path = Path(os.path.join(dirpath, file))
 
                 df = fetch_from_web(year, month, day, hour)

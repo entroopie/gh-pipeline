@@ -1,4 +1,0 @@
-pandas
-prefect
-prefect-gcp[cloud_storage]
-psycopg2-binary
